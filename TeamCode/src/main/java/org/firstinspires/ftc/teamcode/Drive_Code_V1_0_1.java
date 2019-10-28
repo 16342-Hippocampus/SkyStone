@@ -32,6 +32,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="Drive Code V1 0 1", group="Linear Opmode")
@@ -43,6 +46,9 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
     private DcMotor FL = null;
     private DcMotor BR = null;
     private DcMotor BL = null;
+    private DcMotor RIntake = null;
+    private DcMotor LIntake = null;
+    private TouchSensor IntakeLimit = null;
 
     @Override
     public void runOpMode() {
@@ -56,6 +62,12 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
         FL = hardwareMap.get(DcMotor.class, "FL");
         BR = hardwareMap.get(DcMotor.class, "BR");
         BL = hardwareMap.get(DcMotor.class, "BL");
+        RIntake =hardwareMap.get(DcMotor.class, "RIntake");
+        LIntake =hardwareMap.get(DcMotor.class, "LIntake");
+        IntakeLimit =hardwareMap.get(TouchSensor.class, "IntakeLimit");
+
+
+
         //GIVE ME A REASON TO LIVE
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -63,11 +75,15 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
         FL.setDirection(DcMotor.Direction.REVERSE);
         BR.setDirection(DcMotor.Direction.FORWARD);
         BL.setDirection(DcMotor.Direction.REVERSE);
+        RIntake.setDirection(DcMotor.Direction.FORWARD);
+        LIntake.setDirection(DcMotor.Direction.REVERSE);
 
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        RIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -88,6 +104,16 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
             FR.setPower(v2);
             BL.setPower(v3);
             BR.setPower(v4);
+
+
+            if (gamepad1.right_trigger > 0.25 && IntakeLimit.isPressed()) {
+            RIntake.setPower(1);
+            LIntake.setPower(-1);
+            } else if (gamepad1.left_trigger > 0.25){
+                RIntake.setPower(-1);
+                LIntake.setPower(1);
+            }
+
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
