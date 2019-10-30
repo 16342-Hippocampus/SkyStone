@@ -6,13 +6,13 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @Disabled
-@Autonomous(name="Calibrate", group="chad")
-public class Calibrate extends LinearOpMode {
+@Autonomous(name="Calibrate2", group="chad")
+public class Calibrate2 extends LinearOpMode {
     //
-    DcMotor FL;
-    DcMotor FR;
-    DcMotor BL;
-    DcMotor BR;
+    private DcMotor FR = null;
+    private DcMotor FL = null;
+    private DcMotor BR = null;
+    private DcMotor BL = null;
     //Calculate encoder conversion
     Double cpr = 537.6; //counts per rotation
     Double gearratio = 19.2;
@@ -24,20 +24,32 @@ public class Calibrate extends LinearOpMode {
     //
     public void runOpMode() {
         //
-        FL = hardwareMap.dcMotor.get("FL");
-        FR = hardwareMap.dcMotor.get("FR");
-        BL = hardwareMap.dcMotor.get("BL");
-        BR = hardwareMap.dcMotor.get("BR");
-        FR.setDirection(DcMotorSimple.Direction.REVERSE);//If your robot goes backward, switch this from right to left
-        BR.setDirection(DcMotorSimple.Direction.REVERSE);//If your robot goes backward, switch this from right to left
-        //
+        FR = hardwareMap.get(DcMotor.class, "FR");
+        FL = hardwareMap.get(DcMotor.class, "FL");
+        BR = hardwareMap.get(DcMotor.class, "BR");
+        BL = hardwareMap.get(DcMotor.class, "BL");
+        FR.setDirection(DcMotor.Direction.FORWARD);
+        FL.setDirection(DcMotor.Direction.REVERSE);
+        BR.setDirection(DcMotor.Direction.FORWARD);
+        BL.setDirection(DcMotor.Direction.REVERSE);
+
+        FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         while (!opModeIsActive() && !isStopRequested()) {
             telemetry.addData("status", "waiting for start command...");
             telemetry.update();
         }
         //
-        moveToPosition(20, .2);//Don't change this line, unless you want to calibrate with different speeds
+        //moveToPosition(20, .2);//Don't change this line, unless you want to calibrate with different speeds
         //
+        FL.setPower(1);
+        FR.setPower(1);
+        BL.setPower(1);
+        BR.setPower(1);
+        sleep(1000);
     }
     //
     /*
