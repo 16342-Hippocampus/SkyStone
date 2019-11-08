@@ -36,8 +36,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous (name="Robot Auto Move Forward Right", group="Autonomous")
-public class Robot_Auto_Move_Forward_Right extends LinearOpMode {
+@Autonomous (name="Robot Auto Move Left", group="Autonomous")
+public class Robot_Auto_Move_Left extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -94,18 +94,11 @@ public class Robot_Auto_Move_Forward_Right extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-            FL.setPower(.5);
-            BR.setPower(.5);
-            FR.setPower(.5);
-            BL.setPower(.5);
-            sleep(750);
-
-            FL.setPower(-0.5);
-            BR.setPower(-0.5);
-            FR.setPower(.5);
-            BL.setPower(.5);
+            FL.setPower(0.5);
+            BR.setPower(0.5);
+            FR.setPower(-0.5);
+            BL.setPower(-0.5);
             sleep(1000);
-
             FL.setPower(0);
             BR.setPower(0);
             FR.setPower(0);

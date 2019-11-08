@@ -109,15 +109,26 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
 
             double HookPower = 0;
             double IntakePower = 0;
-
-            FL.setPower(v1);
-            FR.setPower(v2);
-            BL.setPower(v3);
-            BR.setPower(v4);
+            if(gamepad1.right_bumper){
+                FL.setPower(v1/2);
+                FR.setPower(v2/2);
+                BL.setPower(v3/2);
+                BR.setPower(v4/2);
+            }else if (gamepad1.left_bumper){
+                FL.setPower(v1/2);
+                FR.setPower(v2/2);
+                BL.setPower(v3/2);
+                BR.setPower(v4/2);
+            } else {
+                FL.setPower(v1);
+                FR.setPower(v2);
+                BL.setPower(v3);
+                BR.setPower(v4);
+            }
 
 
             if (gamepad1.right_trigger > 0.25) {
-            IntakePower = 1;
+            IntakePower = .5;
             } else if (gamepad1.left_trigger > 0.25 && !IntakeLimit.isPressed()){
                 IntakePower = -1;
             } else {
@@ -126,7 +137,8 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
             RIntake.setPower(IntakePower);
             LIntake.setPower(IntakePower);
 
-            if (gamepad1.left_bumper){
+            
+/*            if (gamepad1.left_bumper){
                 HookPower = -1;
             }else if (gamepad1.right_bumper){
                 HookPower = 1;
@@ -135,7 +147,7 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
             }
             RHook.setPower(HookPower);
             LHook.setPower(HookPower);
-
+*/
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
