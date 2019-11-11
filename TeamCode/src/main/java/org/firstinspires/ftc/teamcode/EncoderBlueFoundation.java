@@ -35,7 +35,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="EncoderDriveTest", group="Pushbot")
+@Autonomous(name="EncoderBlueFoundation", group="Pushbot")
 
 public class EncoderBlueFoundation extends LinearOpMode {
 
@@ -46,7 +46,7 @@ public class EncoderBlueFoundation extends LinearOpMode {
     static final double     TICKS = 537.6 ;
     static final double     WHEEL_DIAMETER_INCHES   = 3.93701;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (TICKS) / (WHEEL_DIAMETER_INCHES * Math.PI);
-    static final double     DRIVE_SPEED             = 0.6;
+    static final double     DRIVE_SPEED             = 0.2;
     static final double     TURN_SPEED              = 0.5;
 
     @Override
@@ -73,7 +73,7 @@ public class EncoderBlueFoundation extends LinearOpMode {
         robot.BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d",
+        telemetry.addData("Path0",  "Starting at %7d :%7d :%7d :%7d",
                 robot.FL.getCurrentPosition(), robot.FR.getCurrentPosition(),
                 robot.BR.getCurrentPosition(), robot.BL.getCurrentPosition());
         telemetry.update();
@@ -83,7 +83,7 @@ public class EncoderBlueFoundation extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  30,  30, 30, 30,5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  30,  30, 30, 30,10.0);  // S1: Forward 47 Inches with 5 Sec timeout
         sleep(100);
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -98,7 +98,8 @@ public class EncoderBlueFoundation extends LinearOpMode {
      *  3) Driver stops the opmode running.
      */
     public void encoderDrive(double speed,
-                             double frontleftInches, double frontrightInches, double backleftInches, double backrightInches,
+                             double frontleftInches, double frontrightInches,
+                             double backleftInches, double backrightInches,
                              double timeoutS) {
         int newFrontLeftTarget;
         int newFrontRightTarget;
