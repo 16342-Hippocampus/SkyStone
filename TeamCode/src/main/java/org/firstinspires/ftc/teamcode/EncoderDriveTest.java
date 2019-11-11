@@ -73,7 +73,7 @@ public class EncoderDriveTest extends LinearOpMode {
     private ElapsedTime     runtime = new ElapsedTime();
 
     static final double     TICKS = 537.6 ;
-    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
+    static final double     WHEEL_DIAMETER_INCHES   = 3.93701 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (TICKS) / (WHEEL_DIAMETER_INCHES * Math.PI);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
