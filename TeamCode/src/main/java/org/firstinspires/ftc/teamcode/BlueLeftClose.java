@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -13,13 +14,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="DylanBlueLeft", group="chad")
-public class DylanBlueLeft extends LinearOpMode {
+@Autonomous(name="BlueLeftClose", group="chad")
+public class BlueLeftClose extends LinearOpMode {
     //
     DcMotor FL;
     DcMotor FR;
     DcMotor BL;
     DcMotor BR;
+    Servo LHook;
+    Servo RHook;
     //28 * 20 / (2ppi * 4.125)
     Double width = 18.0; //inches
     Integer cpr = 28; //counts per rotation
@@ -44,17 +47,27 @@ public class DylanBlueLeft extends LinearOpMode {
         FR = hardwareMap.dcMotor.get("FR");
         BL = hardwareMap.dcMotor.get("BL");
         BR = hardwareMap.dcMotor.get("BR");
+        LHook = hardwareMap.servo.get("LHook");
+        RHook = hardwareMap.servo.get("RHook");
 
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
         //
         waitForStartify();
         //
-        moveToPosition(27.2, 0.2);
+        //strafeToPosition(13.0, 0.2);
         //
-        moveToPosition(-27, 0.2);
+        //moveToPosition(-31.2, 0.2);
         //
-        strafeToPosition(37.4, 0.2);
+        LHook.setPosition(0);
+        sleep(1000);
+        LHook.setPosition(0.4);
+        sleep(1000);
+        //RHook.setPosition(0);
+        //
+        //moveToPosition(31.2, 0.2);
+        //
+        //strafeToPosition(-59.0, 0.2);
         //
     }
     //
@@ -303,3 +316,4 @@ public class DylanBlueLeft extends LinearOpMode {
     }
     //
 }
+

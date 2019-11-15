@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -13,17 +14,19 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="VasylBlueLeftClose", group="chad")
-public class VasylBlueLeftClose extends LinearOpMode {
+@Autonomous(name="ServoWaffle", group="chad")
+public class ServoWaffle extends LinearOpMode {
     //
     DcMotor FL;
     DcMotor FR;
     DcMotor BL;
     DcMotor BR;
+    Servo LHook;
+    Servo RHook;
     //28 * 20 / (2ppi * 4.125)
     Double width = 18.0; //inches
     Integer cpr = 28; //counts per rotation
-    doble gearratio = 19.2;
+    Double gearratio = 19.2;
     Double diameter = 3.93701;
     Double cpi = (cpr * gearratio)/(Math.PI * diameter); //counts per inch, 28cpr * gear ratio / (2 * pi * diameter (in inches, in the center))
     Double bias = 1.01;//default 0.8
@@ -44,19 +47,29 @@ public class VasylBlueLeftClose extends LinearOpMode {
         FR = hardwareMap.dcMotor.get("FR");
         BL = hardwareMap.dcMotor.get("BL");
         BR = hardwareMap.dcMotor.get("BR");
+        LHook = hardwareMap.servo.get("LHook");
+        RHook = hardwareMap.servo.get("RHook");
 
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
         //
         waitForStartify();
         //
-        strafeToPosition(-10.0, 0.2);
+        //strafeToPosition(13.0, 0.2);
         //
-        moveToPosition(27.2, 0.2);
+        //moveToPosition(-31.2, 0.2);
         //
-        moveToPosition(-27.2, 0.2);
+        LHook.setPosition(0);
+        RHook.setPosition(0);
+        sleep(1000);
+        LHook.setPosition(0.4);
+        RHook.setPosition(1);
+        sleep(1000);
+        //RHook.setPosition(0);
         //
-        strafeToPosition(47.0, 0.2);
+        //moveToPosition(31.2, 0.2);
+        //
+        //strafeToPosition(-59.0, 0.2);
         //
     }
     //
