@@ -71,7 +71,7 @@ public class RedRightFar extends LinearOpMode {
         //
         moveToPosition(-25, 0.5);
         moveToPosition(-6, 0.2);
-        //
+
         LHook.setPosition(.91);
         RHook.setPosition(.91);
         sleep(500);
