@@ -23,6 +23,7 @@ public class BlueLeftClose extends LinearOpMode {
     DcMotor BR;
     Servo LHook;
     Servo RHook;
+    Servo StoneServo;
     //28 * 20 / (2ppi * 4.125)
     Double width = 18.0; //inches
     Integer cpr = 28; //counts per rotation
@@ -49,25 +50,39 @@ public class BlueLeftClose extends LinearOpMode {
         BR = hardwareMap.dcMotor.get("BR");
         LHook = hardwareMap.servo.get("LHook");
         RHook = hardwareMap.servo.get("RHook");
+        StoneServo = hardwareMap.servo.get("StoneServo");
 
+        BL.setDirection(DcMotorSimple.Direction.FORWARD);
+        FL.setDirection(DcMotorSimple.Direction.FORWARD);
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
+        LHook.setDirection(Servo.Direction.REVERSE);
+        RHook.setDirection(Servo.Direction.FORWARD);
         //
         waitForStartify();
         //
-        //strafeToPosition(13.0, 0.2);
-        //
-        //moveToPosition(-31.2, 0.2);
-        //
-        LHook.setPosition(0);
+        LHook.setPosition(.5);
+        RHook.setPosition(.4);
         sleep(1000);
-        LHook.setPosition(0.4);
+        LHook.setPosition(.9);
+        RHook.setPosition(.8);
         sleep(1000);
-        //RHook.setPosition(0);
         //
-        //moveToPosition(31.2, 0.2);
+        strafeToPosition(13.0, 0.2);
         //
-        //strafeToPosition(-59.0, 0.2);
+        moveToPosition(-31.2, 0.2);
+        //
+        LHook.setPosition(.7);
+        RHook.setPosition(.57);
+        sleep(1000);
+        //
+        moveToPosition(31.2, 0.2);
+        //
+        LHook.setPosition(.9);
+        RHook.setPosition(.8);
+        sleep(1000);
+        //
+        strafeToPosition(-59.0, 0.2);
         //
     }
     //
