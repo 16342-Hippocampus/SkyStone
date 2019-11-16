@@ -50,8 +50,12 @@ public class ServoWaffle extends LinearOpMode {
         LHook = hardwareMap.servo.get("LHook");
         RHook = hardwareMap.servo.get("RHook");
 
+        BL.setDirection(DcMotorSimple.Direction.FORWARD);
+        FL.setDirection(DcMotorSimple.Direction.FORWARD);
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
+        LHook.setDirection(Servo.Direction.REVERSE);
+        RHook.setDirection(Servo.Direction.FORWARD);
         //
         waitForStartify();
         //
@@ -59,11 +63,14 @@ public class ServoWaffle extends LinearOpMode {
         //
         //moveToPosition(-31.2, 0.2);
         //
-        LHook.setPosition(0);
-        RHook.setPosition(0);
+        LHook.setPosition(.5);
+        RHook.setPosition(.4);
         sleep(1000);
-        LHook.setPosition(0.4);
-        RHook.setPosition(1);
+        LHook.setPosition(.9);
+        RHook.setPosition(.8);
+        sleep(1000);
+        LHook.setPosition(.7);
+        RHook.setPosition(.57);
         sleep(1000);
         //RHook.setPosition(0);
         //
