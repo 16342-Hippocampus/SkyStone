@@ -13,9 +13,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
 //@Disabled
-@Autonomous(name="BlueLeftClose", group="chad")
-public class BlueLeftClose extends LinearOpMode {
+@Autonomous(name="BlueLeftFar", group="chad")
+public class BlueLeftFar extends LinearOpMode {
     //
     DcMotor FL;
     DcMotor FR;
@@ -82,7 +83,9 @@ public class BlueLeftClose extends LinearOpMode {
         sleep(500);
         //
         strafeToPosition(20.0, 0.5);
-        strafeToPosition(-65.0, 0.5);
+        strafeToPosition(-50.0, 0.5);
+        moveToPosition(-25, 0.2);
+        strafeToPosition(-15.0, 0.5);
         strafeToPosition(-11.0, 0.2);
         //
     }
