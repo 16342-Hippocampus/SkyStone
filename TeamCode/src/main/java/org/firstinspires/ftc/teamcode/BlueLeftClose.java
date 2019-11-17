@@ -81,7 +81,7 @@ public class BlueLeftClose extends LinearOpMode {
         RHook.setPosition(1);
         sleep(500);
         //
-        strafeToPosition(20.0, 0.5);
+        strafeToPosition(20w.0, 0.5);
         strafeToPosition(-65.0, 0.5);
         strafeToPosition(-11.0, 0.2);
         //
