@@ -7,15 +7,26 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
+import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+
+import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
+
 //@Disabled
-@Autonomous(name="BlueLeftClose", group="chad")
-public class BlueLeftClose extends LinearOpMode {
+@Autonomous(name="BlueLeftFarVISION", group="chad")
+public class BlueLeftFarVISION extends LinearOpMode {
     //
     DcMotor FL;
     DcMotor FR;
@@ -40,6 +51,15 @@ public class BlueLeftClose extends LinearOpMode {
     Orientation angles;
     Acceleration gravity;
     //
+    private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
+
+    private static final String VUFORIA_KEY =
+            "AbvJs+3/////AAABmecKc3at703Lj8ticYWbWq08wQWXZRotCtbpEjsV/mUeKYwdDdKIj9bVhTZTpHPKevMhV+WVTiIO+VW8uz0aLR5eahMx+STrPONwTjwxe38V5cmPwh8RHkB4Eu8J9Jd1kqST3Sy5/J0oNT23qImslwYm4nyxiqqbjyUI4JcwBU14slrzEnZSLsFcU48fQia9vXnUhbmmVyRwiIdF3BvXOhkJH5pc8nwnuPz9VXV6EFuk4RsliIeUiWjWsxc8rhfOImLoqcQ6l3Xh4WcNYr3TQYiBuCxVuwhKS5ulCcrhY/IiOxsfNe/PjdCK1SbmKao8U0UDine9Cxi9/qe+w5nIkqHuxx+oBpE0BSsfKKF2qhA5";
+
+    // Class Members
+    private VuforiaLocalizer vuforia = null;
+
+
     public void runOpMode(){
         //
         initGyro();
@@ -62,6 +82,29 @@ public class BlueLeftClose extends LinearOpMode {
         LHook.setPosition(1);
         RHook.setPosition(1);
         //
+        /*
+         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
+         * We can pass Vuforia the handle to a camera preview resource (on the RC phone);
+         * If no camera monitor is desired, use the parameter-less constructor instead (commented out below).
+         */
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+
+        // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+
+        parameters.vuforiaLicenseKey = VUFORIA_KEY;
+        parameters.cameraDirection = CAMERA_CHOICE;
+
+        //  Instantiate the Vuforia engine
+        vuforia = ClassFactory.getInstance().createVuforia(parameters);
+
+        // Load the data sets for the trackable objects. These particular data
+        // sets are stored in the 'assets' part of our application.
+        VuforiaTrackables targetsSkyStone = this.vuforia.loadTrackablesFromAsset("Skystone");
+
+        VuforiaTrackable stoneTarget = targetsSkyStone.get(0);
+        stoneTarget.setName("Stone Target");
+
         waitForStartify();
         //
         moveToPosition(-2, 0.2);
@@ -82,9 +125,114 @@ public class BlueLeftClose extends LinearOpMode {
         sleep(500);
         //
         strafeToPosition(20.0, 0.5);
-        strafeToPosition(-65.0, 0.5);
-        strafeToPosition(-11.0, 0.2);
+        strafeToPosition(-50.0, 0.5);
+        moveToPosition(-25, 0.2);
         //
+        turnWithGyro(-90, 0.2);
+        //
+        moveToPosition(55, 0.5);
+        //
+
+        targetsSkyStone.activate();
+        while (!isStopRequested()) {
+
+            // check all the trackable targets to see which one (if any) is visible.
+            if (((VuforiaTrackableDefaultListener) stoneTarget.getListener()).isVisible()) {
+                telemetry.addData("Visible Target", stoneTarget.getName());
+                OpenGLMatrix location = ((VuforiaTrackableDefaultListener) stoneTarget.getListener()).getVuforiaCameraFromTarget();
+
+                if (location != null) {
+                    // Get the positional part of the coordinates
+                    VectorF translation = location.getTranslation();
+                    //clip the actual X to see if it is closer to the left or right
+                    float closestX = Range.clip(translation.get(0), -20f, 20f);
+                    /*"center" because we (my team) only looks at the right two in the farthest set of three in the quarry,
+                    so the leftmost image would be the center of the three stones concerned */
+                    if (closestX == -20) {
+                        telemetry.addData("Skystone Target:", "Center");
+                        moveToPosition(-25, 0.2);
+                        //
+                        turnWithGyro(90, -0.2);
+                        //
+                        moveToPosition(63, 0.2);
+                        //
+                        strafeToPosition(-6.0, 0.2);
+                        //
+                        strafeToPosition(6.0, 0.2);
+                        //
+                        moveToPosition(-54, 0.2);
+                        //
+                        moveToPosition(68.6, 0.2);
+                        //
+                        strafeToPosition(-7.0, 0.2);
+                        //
+                        strafeToPosition(7.8, 0.2);
+                        //
+                        moveToPosition(-72.6, 0.2);
+                        //
+                        moveToPosition(15.6, 0.2);
+                        //
+                    }
+                    //Right most stone of the two
+                    if (closestX == 20) {
+                        telemetry.addData("Skystone Target:", "Right");
+                        moveToPosition(-25, 0.2);
+                        //
+                        turnWithGyro(90, -0.2);
+                        //
+                        moveToPosition(63, 0.2);
+                        //
+                        strafeToPosition(-6.0, 0.2);
+                        //
+                        strafeToPosition(6.0, 0.2);
+                        //
+                        moveToPosition(-54, 0.2);
+                        //
+                        moveToPosition(68.6, 0.2);
+                        //
+                        strafeToPosition(-7.0, 0.2);
+                        //
+                        strafeToPosition(7.8, 0.2);
+                        //
+                        moveToPosition(-72.6, 0.2);
+                        //
+                        moveToPosition(15.6, 0.2);
+                        //
+                    }
+                    //Also express the relative pose (for info purposes)
+                    telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
+                            translation.get(0), translation.get(1), translation.get(2));
+                } else {
+                    telemetry.addData("Visible Target", "none");
+                    moveToPosition(-25, 0.2);
+                    //
+                    turnWithGyro(90, -0.2);
+                    //
+                    moveToPosition(63, 0.2);
+                    //
+                    strafeToPosition(-6.0, 0.2);
+                    //
+                    strafeToPosition(6.0, 0.2);
+                    //
+                    moveToPosition(-54, 0.2);
+                    //
+                    moveToPosition(68.6, 0.2);
+                    //
+                    strafeToPosition(-7.0, 0.2);
+                    //
+                    strafeToPosition(7.8, 0.2);
+                    //
+                    moveToPosition(-72.6, 0.2);
+                    //
+                    moveToPosition(15.6, 0.2);
+                    //
+                }
+                telemetry.update();
+
+            }
+
+
+        }
     }
     //
     /*
