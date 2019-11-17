@@ -62,6 +62,8 @@ public class BlueLeftFar extends LinearOpMode {
 
         LHook.setPosition(1);
         RHook.setPosition(1);
+
+        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
         waitForStartify();
         //
