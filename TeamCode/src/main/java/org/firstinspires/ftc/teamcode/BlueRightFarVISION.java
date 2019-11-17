@@ -78,9 +78,6 @@ public class BlueRightFarVISION extends LinearOpMode {
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
         LHook.setDirection(Servo.Direction.REVERSE);
         RHook.setDirection(Servo.Direction.FORWARD);
-
-        LHook.setPosition(1);
-        RHook.setPosition(1);
         //
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
@@ -108,6 +105,8 @@ public class BlueRightFarVISION extends LinearOpMode {
         AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
 
         waitForStartify();
+        LHook.setPosition(1);
+        RHook.setPosition(1);
 
         targetsSkyStone.activate();
         while (!isStopRequested()) {
