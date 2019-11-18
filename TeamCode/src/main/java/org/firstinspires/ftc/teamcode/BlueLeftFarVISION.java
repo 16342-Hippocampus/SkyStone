@@ -102,11 +102,11 @@ public class BlueLeftFarVISION extends LinearOpMode {
         VuforiaTrackable stoneTarget = targetsSkyStone.get(0);
         stoneTarget.setName("Stone Target");
 
-        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
 
         waitForStartify();
 
-        LHook.setPosition(1);
+      /*  LHook.setPosition(1);
         RHook.setPosition(1);
         //
         moveToPosition(-2, 0.2);
@@ -130,11 +130,11 @@ public class BlueLeftFarVISION extends LinearOpMode {
         strafeToPosition(-50.0, 0.5);
         moveToPosition(-25, 0.2);
         //
-        turnWithGyro(-90, 0.2);
+        turnWithGyro(89, -0.2);
         //
         moveToPosition(55, 0.5);
         //
-
+*/
         targetsSkyStone.activate();
         while (!isStopRequested()) {
 
@@ -152,83 +152,21 @@ public class BlueLeftFarVISION extends LinearOpMode {
                     so the leftmost image would be the center of the three stones concerned */
                     if (closestX == -20) {
                         telemetry.addData("Skystone Target:", "Center");
-                        moveToPosition(-25, 0.2);
-                        //
-                        turnWithGyro(90, -0.2);
-                        //
-                        moveToPosition(63, 0.2);
-                        //
-                        strafeToPosition(-6.0, 0.2);
-                        //
-                        strafeToPosition(6.0, 0.2);
-                        //
-                        moveToPosition(-54, 0.2);
-                        //
-                        moveToPosition(68.6, 0.2);
-                        //
-                        strafeToPosition(-7.0, 0.2);
-                        //
-                        strafeToPosition(7.8, 0.2);
-                        //
-                        moveToPosition(-72.6, 0.2);
-                        //
-                        moveToPosition(15.6, 0.2);
-                        //
+
                     }
                     //Right most stone of the two
                     if (closestX == 20) {
                         telemetry.addData("Skystone Target:", "Right");
-                        moveToPosition(-25, 0.2);
-                        //
-                        turnWithGyro(90, -0.2);
-                        //
-                        moveToPosition(63, 0.2);
-                        //
-                        strafeToPosition(-6.0, 0.2);
-                        //
-                        strafeToPosition(6.0, 0.2);
-                        //
-                        moveToPosition(-54, 0.2);
-                        //
-                        moveToPosition(68.6, 0.2);
-                        //
-                        strafeToPosition(-7.0, 0.2);
-                        //
-                        strafeToPosition(7.8, 0.2);
-                        //
-                        moveToPosition(-72.6, 0.2);
-                        //
-                        moveToPosition(15.6, 0.2);
-                        //
+
                     }
                     //Also express the relative pose (for info purposes)
                     telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
                             translation.get(0), translation.get(1), translation.get(2));
-                } else {
-                    telemetry.addData("Visible Target", "none");
-                    moveToPosition(-25, 0.2);
-                    //
-                    turnWithGyro(90, -0.2);
-                    //
-                    moveToPosition(63, 0.2);
-                    //
-                    strafeToPosition(-6.0, 0.2);
-                    //
-                    strafeToPosition(6.0, 0.2);
-                    //
-                    moveToPosition(-54, 0.2);
-                    //
-                    moveToPosition(68.6, 0.2);
-                    //
-                    strafeToPosition(-7.0, 0.2);
-                    //
-                    strafeToPosition(7.8, 0.2);
-                    //
-                    moveToPosition(-72.6, 0.2);
-                    //
-                    moveToPosition(15.6, 0.2);
-                    //
                 }
+                telemetry.update();
+
+            } else {
+                telemetry.addData("Visible Target", "none");
                 telemetry.update();
 
             }

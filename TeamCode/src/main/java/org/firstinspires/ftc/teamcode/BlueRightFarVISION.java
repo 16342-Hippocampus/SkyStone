@@ -25,7 +25,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
 
 //@Disabled
-@Autonomous(name="BlueLeftFarVISION", group="chad")
+@Autonomous(name="BlueRightFarVISION", group="chad")
 public class BlueRightFarVISION extends LinearOpMode {
     //
     DcMotor FL;
@@ -102,7 +102,7 @@ public class BlueRightFarVISION extends LinearOpMode {
         VuforiaTrackable stoneTarget = targetsSkyStone.get(0);
         stoneTarget.setName("Stone Target");
 
-        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
 
         waitForStartify();
         LHook.setPosition(1);

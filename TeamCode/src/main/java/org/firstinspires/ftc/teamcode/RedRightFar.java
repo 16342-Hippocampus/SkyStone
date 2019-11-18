@@ -15,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 //@Disabled
-@Autonomous(name="BlueLeftFar", group="chad")
+@Autonomous(name="RedRightFar", group="chad")
 public class RedRightFar extends LinearOpMode {
     //
     DcMotor FL;

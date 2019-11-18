@@ -60,7 +60,7 @@ public class BlueLeftFar extends LinearOpMode {
         LHook.setDirection(Servo.Direction.REVERSE);
         RHook.setDirection(Servo.Direction.FORWARD);
 
-        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
         waitForStartify();
         LHook.setPosition(1);
