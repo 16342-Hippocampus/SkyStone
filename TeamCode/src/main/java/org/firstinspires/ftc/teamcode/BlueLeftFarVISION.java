@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
@@ -35,14 +36,14 @@ public class BlueLeftFarVISION extends LinearOpMode {
     Servo LHook;
     Servo RHook;
     Servo StoneServo;
-    //28 * 20 / (2ppi * 4.125)
+
     Double width = 18.0; //inches
-    Integer cpr = 28; //counts per rotation
+    Integer cpr = 28; //counts per rotation of the final output
     Double gearratio = 19.2;
     Double diameter = 3.93701;
     Double cpi = (cpr * gearratio)/(Math.PI * diameter); //counts per inch, 28cpr * gear ratio / (2 * pi * diameter (in inches, in the center))
     Double bias = 1.01;//default 0.8
-    Double meccyBias = 0.9;//change to adjust only strafing movement
+    Double meccyBias = 0.9;//change to adjust only strafing movement. DO NOT ADJUST THIS OR ALL OF THE STRAFING IN THE AUTO WILL NEED TO BE ADJUSTED!!!
     //
     Double conversion = cpi * bias;
     Boolean exit = false;
@@ -51,16 +52,18 @@ public class BlueLeftFarVISION extends LinearOpMode {
     Orientation angles;
     Acceleration gravity;
     //
-    private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
+    private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK; //I'm not sure if this does anything useful, but I'm scared to delete it.
 
     private static final String VUFORIA_KEY =
             "AbvJs+3/////AAABmecKc3at703Lj8ticYWbWq08wQWXZRotCtbpEjsV/mUeKYwdDdKIj9bVhTZTpHPKevMhV+WVTiIO+VW8uz0aLR5eahMx+STrPONwTjwxe38V5cmPwh8RHkB4Eu8J9Jd1kqST3Sy5/J0oNT23qImslwYm4nyxiqqbjyUI4JcwBU14slrzEnZSLsFcU48fQia9vXnUhbmmVyRwiIdF3BvXOhkJH5pc8nwnuPz9VXV6EFuk4RsliIeUiWjWsxc8rhfOImLoqcQ6l3Xh4WcNYr3TQYiBuCxVuwhKS5ulCcrhY/IiOxsfNe/PjdCK1SbmKao8U0UDine9Cxi9/qe+w5nIkqHuxx+oBpE0BSsfKKF2qhA5";
-
+    //That key is the developer key I got off of the vuforia website to get it to activate.
     // Class Members
     private VuforiaLocalizer vuforia = null;
+    WebcamName webcamName = null; //This indicates which camera on the robot controller we want to use.
 
 
     public void runOpMode(){
+        webcamName = hardwareMap.get(WebcamName.class, "Webcam 1"); //this retrieves the webcam we are going to use.
         //
         initGyro();
         //
@@ -133,9 +136,14 @@ public class BlueLeftFarVISION extends LinearOpMode {
         turnWithGyro(89, -0.2);
         //
         moveToPosition(55, 0.5);
-        //
+        // All this code is commented out because I needed to specifically work on the vision part of the code without the robot moving.
+        //Since the vision code works, this needs to be uncommented and then edited
+        //so that the robot stops consistently in one place and we can tune the offset values
+        //once the offset values are tuned, we can start creating paths that the robot will run based on the 3 possible combinations of stones.
 */
         targetsSkyStone.activate();
+        //I'm not sure this is the correct while loop. I might instead want this loop to run for a couple seconds and then
+        //move on to code further down so that it's no longer running commands based on what its seeing so that it doesnt get confused.
         while (!isStopRequested()) {
 
             // check all the trackable targets to see which one (if any) is visible.
@@ -152,7 +160,8 @@ public class BlueLeftFarVISION extends LinearOpMode {
                     so the leftmost image would be the center of the three stones concerned */
                     if (closestX == -20) {
                         telemetry.addData("Skystone Target:", "Center");
-
+                        //this tells us that the stones are arranged a particular way.
+                        //now we can run a bunch of movement commands because we know what arrangement pattern the skystones are.
                     }
                     //Right most stone of the two
                     if (closestX == 20) {
