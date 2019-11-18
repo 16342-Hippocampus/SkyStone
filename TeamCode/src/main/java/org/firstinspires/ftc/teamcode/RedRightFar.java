@@ -13,9 +13,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
 //@Disabled
-@Autonomous(name="BlueLeftClose", group="chad")
-public class BlueLeftClose extends LinearOpMode {
+@Autonomous(name="RedRightFar", group="chad")
+public class RedRightFar extends LinearOpMode {
     //
     DcMotor FL;
     DcMotor FR;
@@ -59,20 +60,20 @@ public class BlueLeftClose extends LinearOpMode {
         LHook.setDirection(Servo.Direction.REVERSE);
         RHook.setDirection(Servo.Direction.FORWARD);
 
-        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        LHook.setPosition(1);
+        RHook.setPosition(1);
+
+        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
         waitForStartify();
         //
-        LHook.setPosition(1);
-        RHook.setPosition(1);
-        //
         moveToPosition(-2, 0.2);
         //
-        strafeToPosition(13.0, 0.2);
+        strafeToPosition(-13.0, 0.2);
         //
         moveToPosition(-25, 0.5);
         moveToPosition(-6, 0.2);
-        //
+
         LHook.setPosition(.91);
         RHook.setPosition(.91);
         sleep(500);
@@ -83,9 +84,11 @@ public class BlueLeftClose extends LinearOpMode {
         RHook.setPosition(1);
         sleep(500);
         //
-        strafeToPosition(20.0, 0.5);
-        strafeToPosition(-65.0, 0.5);
-        strafeToPosition(-11.0, 0.2);
+        strafeToPosition(-20.0, 0.5);
+        strafeToPosition(50.0, 0.5);
+        moveToPosition(-25, 0.2);
+        strafeToPosition(15.0, 0.5);
+        strafeToPosition(11.0, 0.2);
         //
     }
     //

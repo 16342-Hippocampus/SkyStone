@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -13,9 +14,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-//@Disabled
-@Autonomous(name="BlueLeftClose", group="chad")
-public class BlueLeftClose extends LinearOpMode {
+
+@Disabled
+@Autonomous(name="StoneServo", group="chad")
+public class StoneServo extends LinearOpMode {
     //
     DcMotor FL;
     DcMotor FR;
@@ -58,24 +60,25 @@ public class BlueLeftClose extends LinearOpMode {
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
         LHook.setDirection(Servo.Direction.REVERSE);
         RHook.setDirection(Servo.Direction.FORWARD);
+        StoneServo.setDirection(Servo.Direction.FORWARD);
 
         //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
         waitForStartify();
         //
-        LHook.setPosition(1);
-        RHook.setPosition(1);
+        StoneServo.setPosition(0.28);
+        sleep(5000);
+
         //
-        moveToPosition(-2, 0.2);
+        //moveToPosition(-2, 0.2);
         //
-        strafeToPosition(13.0, 0.2);
+        //strafeToPosition(13.0, 0.2);
         //
-        moveToPosition(-25, 0.5);
-        moveToPosition(-6, 0.2);
+        //moveToPosition(-25, 0.5);
+        //moveToPosition(-6, 0.2);
         //
-        LHook.setPosition(.91);
-        RHook.setPosition(.91);
-        sleep(500);
+        StoneServo.setPosition(0.9);
+        sleep(5000);
         //
         moveToPosition(50, 1);
         //
