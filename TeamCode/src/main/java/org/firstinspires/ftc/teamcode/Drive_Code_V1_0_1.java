@@ -146,9 +146,9 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
                 LHook.setPosition(.91);
             }
 
-            if (gamepad1.dpad_right){
+            if (gamepad1.dpad_left){
                 StoneServo.setPosition(0.28);
-            }else if(gamepad1.dpad_left){
+            }else if(gamepad1.dpad_right){
                 StoneServo.setPosition(0.9);
             }
 
