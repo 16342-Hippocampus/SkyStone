@@ -24,9 +24,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefau
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
+
 //@Disabled
-@Autonomous(name="BlueLeftFarVISION", group="chad")
-public class BlueLeftFarVISION extends LinearOpMode {
+@Autonomous(name="VISIONCode", group="chad")
+public class VISIONCode extends LinearOpMode {
     //
     DcMotor FL;
     DcMotor FR;
@@ -108,40 +109,6 @@ public class BlueLeftFarVISION extends LinearOpMode {
 
         waitForStartify();
 
-        LHook.setPosition(1);
-        RHook.setPosition(1);
-        //
-        //moveToPosition(-2, 0.2);
-        //
-        strafeToPosition(13.0, 0.2);
-        //
-        moveToPosition(-27, 0.5);
-        moveToPosition(-6, 0.2);
-        //
-        LHook.setPosition(.91);
-        RHook.setPosition(.91);
-        //sleep(500);
-        //
-        moveToPosition(50, 1);
-        LHook.setPosition(1);
-        RHook.setPosition(1);
-        moveToPosition(10, 0.5);
-        //
-        //sleep(500);
-        //
-        //strafeToPosition(20.0, 0.5);
-        strafeToPosition(-43.0, 0.5);
-        moveToPosition(7, 0.3);
-        moveToPosition(-18, 0.5);
-        //
-        strafeToPosition(-100, 0.5);
-        moveToPosition(10, 0.2);
-        turnWithGyro(90, -0.2);
-        //
-        // All this code is commented out because I needed to specifically work on the vision part of the code without the robot moving.
-        //Since the vision code works, this needs to be uncommented and then edited
-        //so that the robot stops consistently in one place and we can tune the offset values
-        //once the offset values are tuned, we can start creating paths that the robot will run based on the 3 possible combinations of stones.
 
         targetsSkyStone.activate();
         //I'm not sure this is the correct while loop. I might instead want this loop to run for a couple seconds and then
