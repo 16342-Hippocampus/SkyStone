@@ -24,7 +24,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefau
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
-
 //@Disabled
 @Autonomous(name="BlueLeftFarVISION", group="chad")
 public class BlueLeftFarVISION extends LinearOpMode {
@@ -53,7 +52,6 @@ public class BlueLeftFarVISION extends LinearOpMode {
     Acceleration gravity;
     //
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK; //I'm not sure if this does anything useful, but I'm scared to delete it.
-
     private static final String VUFORIA_KEY =
             "AbvJs+3/////AAABmecKc3at703Lj8ticYWbWq08wQWXZRotCtbpEjsV/mUeKYwdDdKIj9bVhTZTpHPKevMhV+WVTiIO+VW8uz0aLR5eahMx+STrPONwTjwxe38V5cmPwh8RHkB4Eu8J9Jd1kqST3Sy5/J0oNT23qImslwYm4nyxiqqbjyUI4JcwBU14slrzEnZSLsFcU48fQia9vXnUhbmmVyRwiIdF3BvXOhkJH5pc8nwnuPz9VXV6EFuk4RsliIeUiWjWsxc8rhfOImLoqcQ6l3Xh4WcNYr3TQYiBuCxVuwhKS5ulCcrhY/IiOxsfNe/PjdCK1SbmKao8U0UDine9Cxi9/qe+w5nIkqHuxx+oBpE0BSsfKKF2qhA5";
     //That key is the developer key I got off of the vuforia website to get it to activate.
@@ -93,7 +91,8 @@ public class BlueLeftFarVISION extends LinearOpMode {
         // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraDirection = CAMERA_CHOICE;
+        //parameters.cameraDirection = CAMERA_CHOICE;
+        parameters.cameraName = webcamName;
 
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
@@ -158,6 +157,8 @@ public class BlueLeftFarVISION extends LinearOpMode {
                     float closestX = Range.clip(translation.get(0), -20f, 20f);
                     /*"center" because we (my team) only looks at the right two in the farthest set of three in the quarry,
                     so the leftmost image would be the center of the three stones concerned */
+                    //If using the phone, it should be oriented horizontally with the buttons up
+                    //With the camera
                     if (closestX == -20) {
                         telemetry.addData("Skystone Target:", "Center");
                         //this tells us that the stones are arranged a particular way.
