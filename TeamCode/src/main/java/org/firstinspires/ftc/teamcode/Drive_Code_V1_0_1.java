@@ -49,6 +49,7 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
     private DcMotor LIntake = null;
     private Servo LHook = null;
     private Servo RHook = null;
+    private Servo StoneServo = null;
     private TouchSensor IntakeLimit = null;
 
     @Override
@@ -67,6 +68,7 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
         LIntake =hardwareMap.get(DcMotor.class, "LIntake");
         LHook = hardwareMap.get(Servo.class, "LHook");
         RHook = hardwareMap.get(Servo.class, "RHook");
+        StoneServo = hardwareMap.get(Servo.class, "StoneServo");
         IntakeLimit =hardwareMap.get(TouchSensor.class, "IntakeLimit");
 
 
@@ -80,8 +82,9 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
         BL.setDirection(DcMotor.Direction.REVERSE);
         RIntake.setDirection(DcMotor.Direction.FORWARD);
         LIntake.setDirection(DcMotor.Direction.REVERSE);
-        LHook.setDirection(Servo.Direction.FORWARD);
-        RHook.setDirection(Servo.Direction.REVERSE);
+        LHook.setDirection(Servo.Direction.REVERSE);
+        RHook.setDirection(Servo.Direction.FORWARD);
+        StoneServo.setDirection(Servo.Direction.FORWARD);
 
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -143,14 +146,20 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
                 LHook.setPosition(.91);
             }
 
+            if (gamepad1.dpad_right){
+                StoneServo.setPosition(0.28);
+            }else if(gamepad1.dpad_left){
+                StoneServo.setPosition(0.9);
+            }
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "FL (%.2f), FR (%.2f), BL (%.2f), BR (%.2f)",
                     v1, v2, v3, v4);
-            telemetry.addData ("Hooks, Hooks, Baby!", "RH (%.2f), LH (%,2f)",
-                    RHook.getPosition(), LHook.getPosition());
-            telemetry.addData("Intake","RI (%.2f), LI (%.2f)",
+            telemetry.addData
+                    ("Hooks, Hooks, Baby!", "RH (%.2f), LH (%,2f), Side (%.2f)",
+                    RHook.getPosition(), LHook.getPosition(), StoneServo.getPosition());
+            telemetry.addData("Intake","RI (%.2f), LI (%.2f), Side",
                     RIntake.getPower(), LIntake.getPower());
             telemetry.update();
         }
