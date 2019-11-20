@@ -59,7 +59,7 @@ public class BlueLeftClose extends LinearOpMode {
         LHook.setDirection(Servo.Direction.REVERSE);
         RHook.setDirection(Servo.Direction.FORWARD);
 
-        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
         waitForStartify();
         //
@@ -77,7 +77,7 @@ public class BlueLeftClose extends LinearOpMode {
         RHook.setPosition(.91);
         sleep(500);
         //
-        moveToPosition(50, 0.75);
+        moveToPosition(50, 0.5);
         //
         LHook.setPosition(1);
         RHook.setPosition(1);

@@ -83,6 +83,9 @@ public class BlueRightVISION extends LinearOpMode {
         LHook.setDirection(Servo.Direction.REVERSE);
         RHook.setDirection(Servo.Direction.FORWARD);
         StoneServo.setDirection(Servo.Direction.FORWARD);
+
+        telemetry.addData("Vuforia", "Uninitialized");
+
         //
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
@@ -106,8 +109,9 @@ public class BlueRightVISION extends LinearOpMode {
         VuforiaTrackable stoneTarget = targetsSkyStone.get(0);
         stoneTarget.setName("Stone Target");
 
-        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
 
+        telemetry.addData("Vuforia", "Initialized");
         waitForStartify();
 
         strafeToPosition(-12, 0.2);

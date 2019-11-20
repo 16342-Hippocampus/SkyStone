@@ -53,6 +53,8 @@ public class RedRightClose extends LinearOpMode {
         RHook = hardwareMap.servo.get("RHook");
         StoneServo = hardwareMap.servo.get("StoneServo");
 
+        telemetry.addData("Vuforia", "Uninitialized");
+
         BL.setDirection(DcMotorSimple.Direction.FORWARD);
         FL.setDirection(DcMotorSimple.Direction.FORWARD);
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -60,7 +62,7 @@ public class RedRightClose extends LinearOpMode {
         LHook.setDirection(Servo.Direction.REVERSE);
         RHook.setDirection(Servo.Direction.FORWARD);
 
-        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
         waitForStartify();
         //
@@ -78,14 +80,14 @@ public class RedRightClose extends LinearOpMode {
         RHook.setPosition(.91);
         sleep(500);
         //
-        moveToPosition(50, 0.75);
+        moveToPosition(50, 0.5);
         //
         LHook.setPosition(1);
         RHook.setPosition(1);
         sleep(500);
         //
-        strafeToPosition(-20.0, 0.5);
-        strafeToPosition(65.0, 0.5);
+        strafeToPosition(-28.0, 0.5);
+        strafeToPosition(62.0, 0.5);
         strafeToPosition(11.0, 0.2);
         //
     }

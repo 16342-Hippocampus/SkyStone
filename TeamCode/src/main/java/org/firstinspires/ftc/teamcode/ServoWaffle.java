@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -13,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-
+@Disabled
 @Autonomous(name="ServoWaffle", group="chad")
 public class ServoWaffle extends LinearOpMode {
     //
@@ -63,15 +64,13 @@ public class ServoWaffle extends LinearOpMode {
         //
         //moveToPosition(-31.2, 0.2);
         //
-        LHook.setPosition(.5);
-        RHook.setPosition(.4);
-        sleep(1000);
-        LHook.setPosition(.9);
-        RHook.setPosition(.8);
-        sleep(1000);
-        LHook.setPosition(.7);
-        RHook.setPosition(.57);
-        sleep(1000);
+        LHook.setPosition(1);
+        RHook.setPosition(1);
+        sleep(5000);
+        LHook.setPosition(.91);
+        RHook.setPosition(.91);
+        sleep(5000);
+
         //RHook.setPosition(0);
         //
         //moveToPosition(31.2, 0.2);

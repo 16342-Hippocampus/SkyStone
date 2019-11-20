@@ -106,7 +106,8 @@ public class RedLeftVISION extends LinearOpMode {
         VuforiaTrackable stoneTarget = targetsSkyStone.get(0);
         stoneTarget.setName("Stone Target");
 
-        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        telemetry.addData("Vuforia", "Initialized");
 
         waitForStartify();
 
@@ -133,13 +134,13 @@ public class RedLeftVISION extends LinearOpMode {
                     //If using the phone, it should be oriented horizontally with the buttons up
                     //With the camera
                     if (closestX == -20) {
-                        telemetry.addData("Skystone Target:", "Left");
+                        telemetry.addData("Skystone Target:", "Center");
                         //this tells us that the stones are arranged a particular way.
                         //now we can run a bunch of movement commands because we know what arrangement pattern the skystones are.
                     }
                     //Right most stone of the two
                     if (closestX == 20) {
-                        telemetry.addData("Skystone Target:", "Center");
+                        telemetry.addData("Skystone Target:", "Right");
                     }
                     //Also express the relative pose (for info purposes)
                     telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
@@ -160,44 +161,45 @@ public class RedLeftVISION extends LinearOpMode {
         }
 
         if (closestX == 20f){
-            moveToPosition(6,0.2);
+            moveToPosition(7,0.2);
             strafeToPosition(-24,0.2);
             StoneServo.setPosition(0.28);
             sleep(1000);
             strafeToPosition(13, 0.2);
-            moveToPosition(-51,0.2);
+            moveToPosition(41,0.2);
             strafeToPosition(-7,0.2);
             StoneServo.setPosition(0.9);
             sleep(1000);
             strafeToPosition(3, 0.2);
-            moveToPosition(17,0.2);
+            moveToPosition(-17,0.2);
 
 
         }
         if (closestX == -20f){
+            moveToPosition(-2,0.2);
             strafeToPosition(-24,0.2);
             StoneServo.setPosition(0.28);
             sleep(1000);
-            strafeToPosition(13, 0.2);
-            moveToPosition(-45,0.2);
+            strafeToPosition(11, 0.2);
+            moveToPosition(47,0.2);
             strafeToPosition(-7,0.2);
             StoneServo.setPosition(0.9);
             sleep(1000);
             strafeToPosition(3, 0.2);
-            moveToPosition(17,0.2);
+            moveToPosition(-17,0.2);
         }
         if (closestX == 0f) {
-            moveToPosition(15,0.2);
+            moveToPosition(-9,0.2);
             strafeToPosition(-24,0.2);
             StoneServo.setPosition(0.28);
             sleep(1000);
-            strafeToPosition(12, 0.2);
-            moveToPosition(-66,0.2);
+            strafeToPosition(10, 0.2);
+            moveToPosition(67,0.2);
             strafeToPosition(-7,0.2);
             StoneServo.setPosition(0.9);
             sleep(1000);
             strafeToPosition(3, 0.2);
-            moveToPosition(25,0.2);
+            moveToPosition(-25,0.2);
         }
     }
     //

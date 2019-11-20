@@ -68,30 +68,9 @@ public class StoneServo extends LinearOpMode {
         //
         StoneServo.setPosition(0.28);
         sleep(5000);
-        //down
-
-        //
-        //moveToPosition(-2, 0.2);
-        //
-        //strafeToPosition(13.0, 0.2);
-        //
-        //moveToPosition(-25, 0.5);
-        //moveToPosition(-6, 0.2);
-        //
         StoneServo.setPosition(0.9);
         sleep(5000);
-        //up
-        //
-        moveToPosition(50, 1);
-        //
-        LHook.setPosition(1);
-        RHook.setPosition(1);
-        sleep(500);
-        //
-        strafeToPosition(20.0, 0.5);
-        strafeToPosition(-65.0, 0.5);
-        strafeToPosition(-11.0, 0.2);
-        //
+
     }
     //
     /*

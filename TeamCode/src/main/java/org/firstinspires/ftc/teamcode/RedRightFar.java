@@ -60,7 +60,7 @@ public class RedRightFar extends LinearOpMode {
         LHook.setDirection(Servo.Direction.REVERSE);
         RHook.setDirection(Servo.Direction.FORWARD);
 
-        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
         waitForStartify();
         LHook.setPosition(1);
@@ -77,17 +77,16 @@ public class RedRightFar extends LinearOpMode {
         RHook.setPosition(.91);
         sleep(500);
         //
-        moveToPosition(50, 0.75);
+        moveToPosition(50, 0.5);
         //
         LHook.setPosition(1);
         RHook.setPosition(1);
         sleep(500);
         //
-        strafeToPosition(-20.0, 0.5);
-        strafeToPosition(50.0, 0.5);
-        moveToPosition(-25, 0.2);
-        strafeToPosition(15.0, 0.5);
-        strafeToPosition(11.0, 0.2);
+        strafeToPosition(-28.0, 0.3);
+        strafeToPosition(50.0, 0.3);
+        moveToPosition(-27, 0.3);
+        strafeToPosition(24.0, 0.3);
         //
     }
     //

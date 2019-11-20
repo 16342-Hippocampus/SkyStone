@@ -47,7 +47,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
  * Operation:
  *      Use the DPAD to change the selected sound, and the Right Bumper to play it.
  */
-
+@Disabled
 @TeleOp(name="Soundz", group="Concept")
 public class Soundz extends LinearOpMode {
 
