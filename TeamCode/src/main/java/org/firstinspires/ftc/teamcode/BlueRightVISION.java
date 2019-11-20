@@ -26,7 +26,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
 
 //@Disabled
-@Autonomous(name="BlueRightVISION", group="chad")
+@Autonomous(name="Blue Right VISION", group="chad")
 public class BlueRightVISION extends LinearOpMode {
     //
     DcMotor FL;

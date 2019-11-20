@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 //@Disabled
-@Autonomous(name="BlueLeftClose", group="chad")
+@Autonomous(name="Blue Left Close", group="chad")
 public class BlueLeftClose extends LinearOpMode {
     //
     DcMotor FL;
@@ -77,7 +77,7 @@ public class BlueLeftClose extends LinearOpMode {
         RHook.setPosition(.91);
         sleep(500);
         //
-        moveToPosition(50, 1);
+        moveToPosition(50, 0.75);
         //
         LHook.setPosition(1);
         RHook.setPosition(1);

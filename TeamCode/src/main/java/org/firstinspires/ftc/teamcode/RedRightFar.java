@@ -15,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 //@Disabled
-@Autonomous(name="RedRightFar", group="chad")
+@Autonomous(name="Red Right Far", group="chad")
 public class RedRightFar extends LinearOpMode {
     //
     DcMotor FL;
@@ -60,12 +60,11 @@ public class RedRightFar extends LinearOpMode {
         LHook.setDirection(Servo.Direction.REVERSE);
         RHook.setDirection(Servo.Direction.FORWARD);
 
-        LHook.setPosition(1);
-        RHook.setPosition(1);
-
-        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
         waitForStartify();
+        LHook.setPosition(1);
+        RHook.setPosition(1);
         //
         moveToPosition(-2, 0.2);
         //
@@ -73,12 +72,12 @@ public class RedRightFar extends LinearOpMode {
         //
         moveToPosition(-25, 0.5);
         moveToPosition(-6, 0.2);
-
+        //
         LHook.setPosition(.91);
         RHook.setPosition(.91);
         sleep(500);
         //
-        moveToPosition(50, 1);
+        moveToPosition(50, 0.75);
         //
         LHook.setPosition(1);
         RHook.setPosition(1);
