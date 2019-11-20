@@ -101,8 +101,6 @@ public class BlueRightVISION extends LinearOpMode {
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
 
-        // Load the data sets for the trackable objects. These particular data
-        // sets are stored in the 'assets' part of our application.
         VuforiaTrackables targetsSkyStone = this.vuforia.loadTrackablesFromAsset("Skystone");
 
         VuforiaTrackable stoneTarget = targetsSkyStone.get(0);
@@ -113,41 +111,6 @@ public class BlueRightVISION extends LinearOpMode {
         waitForStartify();
 
         strafeToPosition(-12, 0.2);
-
-        /*LHook.setPosition(1);
-        RHook.setPosition(1);
-        //
-        //moveToPosition(-2, 0.2);
-        //
-        strafeToPosition(13.0, 0.2);
-        //
-        moveToPosition(-27, 0.5);
-        moveToPosition(-6, 0.2);
-        //
-        LHook.setPosition(.91);
-        RHook.setPosition(.91);
-        //sleep(500);
-        //
-        moveToPosition(50, 1);
-        LHook.setPosition(1);
-        RHook.setPosition(1);
-        moveToPosition(10, 0.5);
-        //
-        //sleep(500);
-        //
-        //strafeToPosition(20.0, 0.5);
-        strafeToPosition(-43.0, 0.5);
-        moveToPosition(7, 0.3);
-        moveToPosition(-18, 0.5);
-        //
-        strafeToPosition(-100, 0.5);
-        moveToPosition(10, 0.2);
-        turnWithGyro(90, -0.2);*/
-        //
-        // All this code is commented out because I needed to specifically work on the vision part of the code without the robot moving.
-        //Since the vision code works, this needs to be uncommented and then edited
-        //so that the robot stops consistently in one place and we can tune the offset values
-        //once the offset values are tuned, we can start creating paths that the robot will run based on the 3 possible combinations of stones.
 
         targetsSkyStone.activate();
         //I'm not sure this is the correct while loop. I might instead want this loop to run for a couple seconds and then
@@ -197,7 +160,19 @@ public class BlueRightVISION extends LinearOpMode {
         }
 
         if (closestX == 20f){
-            moveToPosition(5,0.2);
+            moveToPosition(6,0.2);
+            strafeToPosition(-24,0.2);
+            StoneServo.setPosition(0.28);
+            sleep(1000);
+            strafeToPosition(13, 0.2);
+            moveToPosition(-51,0.2);
+            strafeToPosition(-7,0.2);
+            StoneServo.setPosition(0.9);
+            sleep(1000);
+            strafeToPosition(3, 0.2);
+            moveToPosition(17,0.2);
+
+
         }
         if (closestX == -20f){
             strafeToPosition(-24,0.2);
@@ -205,14 +180,24 @@ public class BlueRightVISION extends LinearOpMode {
             sleep(1000);
             strafeToPosition(13, 0.2);
             moveToPosition(-45,0.2);
-            strafeToPosition(-3,0.2);
+            strafeToPosition(-7,0.2);
             StoneServo.setPosition(0.9);
             sleep(1000);
             strafeToPosition(3, 0.2);
             moveToPosition(17,0.2);
         }
         if (closestX == 0f) {
-            strafeToPosition(5, 0.2);
+            moveToPosition(15,0.2);
+            strafeToPosition(-24,0.2);
+            StoneServo.setPosition(0.28);
+            sleep(1000);
+            strafeToPosition(12, 0.2);
+            moveToPosition(-66,0.2);
+            strafeToPosition(-7,0.2);
+            StoneServo.setPosition(0.9);
+            sleep(1000);
+            strafeToPosition(3, 0.2);
+            moveToPosition(25,0.2);
         }
     }
     //
