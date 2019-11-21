@@ -105,7 +105,7 @@ public class BlueLeftFarVISION extends LinearOpMode {
         VuforiaTrackable stoneTarget = targetsSkyStone.get(0);
         stoneTarget.setName("Stone Target");
 
-        //AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
+        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
 
         waitForStartify();
 
