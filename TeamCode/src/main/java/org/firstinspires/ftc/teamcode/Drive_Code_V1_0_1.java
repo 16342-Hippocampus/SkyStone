@@ -50,7 +50,7 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
     private Servo LHook = null;
     private Servo RHook = null;
     private Servo StoneServo = null;
-    private TouchSensor IntakeLimit = null;
+    //private TouchSensor IntakeLimit = null;
 
     @Override
     public void runOpMode() {
@@ -69,7 +69,7 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
         LHook = hardwareMap.get(Servo.class, "LHook");
         RHook = hardwareMap.get(Servo.class, "RHook");
         StoneServo = hardwareMap.get(Servo.class, "StoneServo");
-        IntakeLimit =hardwareMap.get(TouchSensor.class, "IntakeLimit");
+        //IntakeLimit =hardwareMap.get(TouchSensor.class, "IntakeLimit");
 
 
 
@@ -129,7 +129,7 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
 
             if (gamepad1.right_trigger > 0.25) {
             IntakePower = .5;
-            } else if (gamepad1.left_trigger > 0.25 && !IntakeLimit.isPressed()){
+            } else if (gamepad1.left_trigger > 0.25 /*&& !IntakeLimit.isPressed()*/){
                 IntakePower = -1;
             } else {
                 IntakePower = 0;
