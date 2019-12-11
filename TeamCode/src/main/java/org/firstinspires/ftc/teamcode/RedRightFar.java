@@ -22,9 +22,9 @@ public class RedRightFar extends LinearOpMode {
     DcMotor FR;
     DcMotor BL;
     DcMotor BR;
-    Servo LHook;
-    Servo RHook;
-    Servo StoneServo;
+    //Servo LHook;
+    //Servo RHook;
+    //Servo StoneServo;
     //28 * 20 / (2ppi * 4.125)
     Double width = 18.0; //inches
     Integer cpr = 28; //counts per rotation
@@ -49,39 +49,39 @@ public class RedRightFar extends LinearOpMode {
         FR = hardwareMap.dcMotor.get("FR");
         BL = hardwareMap.dcMotor.get("BL");
         BR = hardwareMap.dcMotor.get("BR");
-        LHook = hardwareMap.servo.get("LHook");
-        RHook = hardwareMap.servo.get("RHook");
-        StoneServo = hardwareMap.servo.get("StoneServo");
+        //LHook = hardwareMap.servo.get("LHook");
+        //RHook = hardwareMap.servo.get("RHook");
+        //StoneServo = hardwareMap.servo.get("StoneServo");
 
         BL.setDirection(DcMotorSimple.Direction.FORWARD);
         FL.setDirection(DcMotorSimple.Direction.FORWARD);
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
-        LHook.setDirection(Servo.Direction.REVERSE);
-        RHook.setDirection(Servo.Direction.FORWARD);
+        //LHook.setDirection(Servo.Direction.REVERSE);
+        //RHook.setDirection(Servo.Direction.FORWARD);
 
         AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
         waitForStartify();
-        LHook.setPosition(1);
-        RHook.setPosition(1);
+        //LHook.setPosition(1);
+        //RHook.setPosition(1);
         //
         moveToPosition(-2, 0.2);
         //
         strafeToPosition(-13.0, 0.2);
         //
-        moveToPosition(-25, 0.5);
-        moveToPosition(-6, 0.2);
+        //moveToPosition(-25, 0.5);
+        //moveToPosition(-6, 0.2);
         //
-        LHook.setPosition(.91);
-        RHook.setPosition(.91);
-        sleep(500);
+        //LHook.setPosition(.91);
+        //RHook.setPosition(.91);
+        //sleep(500);
         //
-        moveToPosition(50, 0.5);
+        //moveToPosition(50, 0.5);
         //
-        LHook.setPosition(1);
-        RHook.setPosition(1);
-        sleep(500);
+        //LHook.setPosition(1);
+        //RHook.setPosition(1);
+        //sleep(500);
         //
         strafeToPosition(-28.0, 0.3);
         strafeToPosition(50.0, 0.3);

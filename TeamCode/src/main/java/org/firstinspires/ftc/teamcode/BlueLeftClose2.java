@@ -15,21 +15,22 @@ public class BlueLeftClose2 extends LinearOpMode {
         //
         waitForStart();
 
-        // make sure hooky thingies are in the up posotion or whatever
+        //Raise the hooks
         gaytorBoi1.LHook.setPosition(1);
         gaytorBoi1.RHook.setPosition(1);
-        //
+        //Move a tad away from the wall
         gaytorBoi1.moveToPosition(-2, 0.2);
-        //
+        //Mash into the wall in zealous glory
         gaytorBoi1.strafeToPosition(13.0, 0.2);
-        //
+        //Move the bulk of the distance to the foundation
         gaytorBoi1.moveToPosition(-25, 0.5);
+        //Gently mash the robot into the foundation
         gaytorBoi1.moveToPosition(-6, 0.2);
-        //
-        gaytorBoi1.LHook.setPosition(.91);
-        gaytorBoi1.RHook.setPosition(.91);
+        //Lower the hooks
+        //gaytorBoi1.LHook.setPosition(.91);
+        //gaytorBoi1.RHook.setPosition(.91);
         sleep(500);
-        //
+        //Pull the foundation back to the wall
         gaytorBoi1.moveToPosition(50, 0.5);
         //
         gaytorBoi1.LHook.setPosition(1);

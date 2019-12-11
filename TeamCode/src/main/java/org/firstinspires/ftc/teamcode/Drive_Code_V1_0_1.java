@@ -31,7 +31,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -45,11 +46,14 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
     private DcMotor FL = null;
     private DcMotor BR = null;
     private DcMotor BL = null;
-    private DcMotor RIntake = null;
-    private DcMotor LIntake = null;
-    private Servo LHook = null;
-    private Servo RHook = null;
-    private Servo StoneServo = null;
+    private DcMotor FRIntake = null;
+    private DcMotor FLIntake = null;
+    private CRServo IntakeServo = null;
+    //private Servo LHook = null;
+    //private Servo RHook = null;
+    //private Servo StoneServo = null;
+    private DcMotor BRIntake = null;
+    private DcMotor BLIntake = null;
     //private TouchSensor IntakeLimit = null;
 
     @Override
@@ -64,11 +68,14 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
         FL = hardwareMap.get(DcMotor.class, "FL");
         BR = hardwareMap.get(DcMotor.class, "BR");
         BL = hardwareMap.get(DcMotor.class, "BL");
-        RIntake =hardwareMap.get(DcMotor.class, "RIntake");
-        LIntake =hardwareMap.get(DcMotor.class, "LIntake");
-        LHook = hardwareMap.get(Servo.class, "LHook");
-        RHook = hardwareMap.get(Servo.class, "RHook");
-        StoneServo = hardwareMap.get(Servo.class, "StoneServo");
+        FRIntake =hardwareMap.get(DcMotor.class, "FRIntake");
+        FLIntake =hardwareMap.get(DcMotor.class, "FLIntake");
+        BRIntake =hardwareMap.get(DcMotor.class, "BRIntake");
+        BLIntake =hardwareMap.get(DcMotor.class, "BLIntake");
+        IntakeServo = hardwareMap.get(CRServo.class, "IntakeServo");
+        //LHook = hardwareMap.get(Servo.class, "LHook");
+        //RHook = hardwareMap.get(Servo.class, "RHook");
+        //StoneServo = hardwareMap.get(Servo.class, "StoneServo");
         //IntakeLimit =hardwareMap.get(TouchSensor.class, "IntakeLimit");
 
 
@@ -80,18 +87,18 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
         FL.setDirection(DcMotor.Direction.REVERSE);
         BR.setDirection(DcMotor.Direction.FORWARD);
         BL.setDirection(DcMotor.Direction.REVERSE);
-        RIntake.setDirection(DcMotor.Direction.FORWARD);
-        LIntake.setDirection(DcMotor.Direction.REVERSE);
-        LHook.setDirection(Servo.Direction.REVERSE);
-        RHook.setDirection(Servo.Direction.FORWARD);
-        StoneServo.setDirection(Servo.Direction.FORWARD);
+        FRIntake.setDirection(DcMotor.Direction.FORWARD);
+        FLIntake.setDirection(DcMotor.Direction.REVERSE);
+        //LHook.setDirection(Servo.Direction.REVERSE);
+        //RHook.setDirection(Servo.Direction.FORWARD);
+        //StoneServo.setDirection(Servo.Direction.FORWARD);
 
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        RIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        LIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FRIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FLIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -134,11 +141,11 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
             } else {
                 IntakePower = 0;
             }
-            RIntake.setPower(IntakePower);
-            LIntake.setPower(IntakePower);
-
-            
-            if (gamepad1.dpad_up){
+            FRIntake.setPower(IntakePower);
+            FLIntake.setPower(IntakePower);
+            BLIntake.setPower(IntakePower);
+            BRIntake.setPower(IntakePower);
+/*            if (gamepad1.dpad_up){
                 RHook.setPosition(1);
                 LHook.setPosition(1);
             }else if (gamepad1.dpad_down){
@@ -150,17 +157,17 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
                 StoneServo.setPosition(0.28);
             }else if(gamepad1.dpad_right){
                 StoneServo.setPosition(0.9);
-            }
-
+            }*/
+            IntakeServo.setPower(0.75);
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "FL (%.2f), FR (%.2f), BL (%.2f), BR (%.2f)",
                     v1, v2, v3, v4);
             telemetry.addData
                     ("Hooks, Hooks, Baby!", "RH (%.2f), LH (%,2f), Side (%.2f)",
-                    RHook.getPosition(), LHook.getPosition(), StoneServo.getPosition());
+                    //RHook.getPosition(), LHook.getPosition(), StoneServo.getPosition());
             telemetry.addData("Intake","RI (%.2f), LI (%.2f), Side",
-                    RIntake.getPower(), LIntake.getPower());
+                    FRIntake.getPower(), FLIntake.getPower()));
             telemetry.update();
         }
     }

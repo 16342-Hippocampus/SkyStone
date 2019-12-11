@@ -81,7 +81,7 @@ public class Drive_Code_V1 extends LinearOpMode {
             final double v2 = r * Math.sin(robotAngle) - rightX;
             final double v3 = r * Math.sin(robotAngle) + rightX;
             final double v4 = r * Math.cos(robotAngle) - rightX;
-
+//12/11/2019, We give up, we don't want to work, we give up
             FL.setPower(v1);
             FR.setPower(v2);
             BL.setPower(v3);
