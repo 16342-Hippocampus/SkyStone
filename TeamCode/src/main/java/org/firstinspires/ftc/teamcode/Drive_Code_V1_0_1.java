@@ -33,14 +33,19 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.Servo.Direction;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 //@Disabled
 @TeleOp(name="Drive Code V1 0 1", group="Linear Opmode")
 public class Drive_Code_V1_0_1 extends LinearOpMode {
+    GaytorCentral gaytor = new GaytorCentral(this);
 
     // Declare OpMode members.
+
+
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor FR = null;
     private DcMotor FL = null;
@@ -49,63 +54,40 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
     private DcMotor FRIntake = null;
     private DcMotor FLIntake = null;
     private CRServo Roller = null;
-    //private Servo LHook = null;
-    //private Servo RHook = null;
+    private Servo LHook = null;
+    private Servo RHook = null;
     //private Servo StoneServo = null;
     //private DcMotor BRIntake = null;
     //private DcMotor BLIntake = null;
     //private TouchSensor IntakeLimit = null;
+    private CRServo LOuttake = null;
+    private CRServo ROuttake = null;
+
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+        gaytor.ColorInit();
 
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
         FR = hardwareMap.get(DcMotor.class, "FR");
         FL = hardwareMap.get(DcMotor.class, "FL");
         BR = hardwareMap.get(DcMotor.class, "BR");
         BL = hardwareMap.get(DcMotor.class, "BL");
         FRIntake =hardwareMap.get(DcMotor.class, "FRIntake");
         FLIntake =hardwareMap.get(DcMotor.class, "FLIntake");
-        //BRIntake =hardwareMap.get(DcMotor.class, "BRIntake");
-        //BLIntake =hardwareMap.get(DcMotor.class, "BLIntake");
+        //BRIntake =OpModeReference.hardwareMap.get(DcMotor.class, "BRIntake");
+        //BLIntake =OpModeReference.hardwareMap.get(DcMotor.class, "BLIntake");
         Roller = hardwareMap.get(CRServo.class, "Roller");
-        //LHook = hardwareMap.get(Servo.class, "LHook");
-        //RHook = hardwareMap.get(Servo.class, "RHook");
-        //StoneServo = hardwareMap.get(Servo.class, "StoneServo");
-        //IntakeLimit =hardwareMap.get(TouchSensor.class, "IntakeLimit");
+        LHook = hardwareMap.get(Servo.class, "LHook");
+        RHook = hardwareMap.get(Servo.class, "RHook");
+
+        //StoneServo = OpModeReference.hardwareMap.get(Servo.class, "StoneServo");
+        //IntakeLimit =OpModeReference.hardwareMap.get(TouchSensor.class, "IntakeLimit");
+        LOuttake =hardwareMap.get(CRServo.class, "LOuttake");
+        ROuttake =hardwareMap.get(CRServo.class, "ROuttake");
 
 
-
-        //GIVE ME A REASON TO LIVE
-        // Most robots need the motor on one side to be reversed to drive forward
-        // Reverse the motor that runs backwards when connected directly to the battery
-        FR.setDirection(DcMotor.Direction.FORWARD);
-        FL.setDirection(DcMotor.Direction.REVERSE);
-        BR.setDirection(DcMotor.Direction.FORWARD);
-        BL.setDirection(DcMotor.Direction.REVERSE);
-        FRIntake.setDirection(DcMotor.Direction.REVERSE);
-        FLIntake.setDirection(DcMotor.Direction.FORWARD);
-        //BRIntake.setDirection(DcMotor.Direction.REVERSE);
-        //BLIntake.setDirection(DcMotor.Direction.FORWARD);
-
-        //LHook.setDirection(Servo.Direction.REVERSE);
-        //RHook.setDirection(Servo.Direction.FORWARD);
-        //StoneServo.setDirection(Servo.Direction.FORWARD);
-
-        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FRIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FLIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //BRIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //BLIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
 
@@ -143,15 +125,24 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
                 FRIntake.setPower(0.5);
                 FLIntake.setPower(0.5);
                 Roller.setPower(-0.75);
+                LOuttake.setPower(0.75);
+                ROuttake.setPower(0.75);
             } else if (gamepad1.left_trigger > 0.25 /*&& !IntakeLimit.isPressed()*/){
                 FRIntake.setPower(-.5);
                 FLIntake.setPower(-.5 );
                 Roller.setPower(-0.75);
+                LOuttake.setPower(-0.75);
+                ROuttake.setPower(-0.75);
             } else {
                 FRIntake.setPower(0);
                 FLIntake.setPower(0);
+                LOuttake.setPower(0);
+                ROuttake.setPower(0);
 
             }
+
+
+            gaytor.ColorPlayground();
             /*if (gamepad1.right_bumper) {
                 BRIntake.setPower(0.5);
                 BLIntake.setPower(0.5);
@@ -178,6 +169,17 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
                 StoneServo.setPosition(0.9);
             }*/
 
+/*            if(gamepad1.x){
+                LOuttake.setPower(0.75)
+                ROuttake.setPower(0.75)
+              }else if (gamepad1.b){
+                LOuttake.setPower(-0.75);
+                ROuttake.setPower(-0.75);
+            } else {
+                LOuttake.setPower(0);
+                ROuttake.setPower(0);
+            }
+*/
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "FL (%.2f), FR (%.2f), BL (%.2f), BR (%.2f)",

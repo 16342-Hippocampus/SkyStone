@@ -23,6 +23,9 @@ public class GaytorCentral {
 
     public GaytorCentral(LinearOpMode opMode) {
         OpModeReference = opMode;
+
+
+
     }
 
     RevBlinkinLedDriver blinkinLedDriver;
@@ -71,74 +74,6 @@ public class GaytorCentral {
     }
 
 
-    public void GaytorInit(){
-        ElapsedTime runtime = new ElapsedTime();
-        DcMotor FR = null;
-        DcMotor FL = null;
-        DcMotor BR = null;
-        DcMotor BL = null;
-        DcMotor FRIntake = null;
-        DcMotor FLIntake = null;
-        CRServo Roller = null;
-        Servo LHook = null;
-        Servo RHook = null;
-        // Servo StoneServo = null;
-        // DcMotor BRIntake = null;
-        // DcMotor BLIntake = null;
-        // TouchSensor IntakeLimit = null;
-        CRServo LOuttake;
-        CRServo ROuttake;
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
-        FR = OpModeReference.hardwareMap.get(DcMotor.class, "FR");
-        FL = OpModeReference.hardwareMap.get(DcMotor.class, "FL");
-        BR = OpModeReference.hardwareMap.get(DcMotor.class, "BR");
-        BL = OpModeReference.hardwareMap.get(DcMotor.class, "BL");
-        FRIntake =OpModeReference.hardwareMap.get(DcMotor.class, "FRIntake");
-        FLIntake =OpModeReference.hardwareMap.get(DcMotor.class, "FLIntake");
-        //BRIntake =OpModeReference.hardwareMap.get(DcMotor.class, "BRIntake");
-        //BLIntake =OpModeReference.hardwareMap.get(DcMotor.class, "BLIntake");
-        Roller = OpModeReference.hardwareMap.get(CRServo.class, "Roller");
-        LHook = OpModeReference.hardwareMap.get(Servo.class, "LHook");
-        RHook = OpModeReference.hardwareMap.get(Servo.class, "RHook");
-        //StoneServo = OpModeReference.hardwareMap.get(Servo.class, "StoneServo");
-        //IntakeLimit =OpModeReference.hardwareMap.get(TouchSensor.class, "IntakeLimit");
-        LOuttake =OpModeReference.hardwareMap.get(CRServo.class, "LOuttake");
-        ROuttake =OpModeReference.hardwareMap.get(CRServo.class, "ROuttake");
-
-        //GIVE ME A REASON TO LIVE
-        // Most robots need the motor on one side to be reversed to drive forward
-        // Reverse the motor that runs backwards when connected directly to the battery
-        FR.setDirection(DcMotor.Direction.FORWARD);
-        FL.setDirection(DcMotor.Direction.REVERSE);
-        BR.setDirection(DcMotor.Direction.FORWARD);
-        BL.setDirection(DcMotor.Direction.REVERSE);
-        FRIntake.setDirection(DcMotor.Direction.REVERSE);
-        FLIntake.setDirection(DcMotor.Direction.FORWARD);
-        //BRIntake.setDirection(DcMotor.Direction.REVERSE);
-        //BLIntake.setDirection(DcMotor.Direction.FORWARD);
-        ROuttake.setDirection(DcMotor.Direction.REVERSE);
-        LOuttake.setDirection(DcMotor.Direction.FORWARD);
-
-        LHook.setDirection(Servo.Direction.REVERSE);
-        RHook.setDirection(Servo.Direction.FORWARD);
-        //StoneServo.setDirection(Servo.Direction.FORWARD);
-
-        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FRIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FLIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //BRIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //BLIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        // Wait for the game to start (driver presses PLAY)
-
-
-
-    }
 
 }
 

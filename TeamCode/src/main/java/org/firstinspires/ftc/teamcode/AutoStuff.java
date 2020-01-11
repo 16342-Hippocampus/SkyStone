@@ -13,17 +13,21 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-
 //@Disabled
-@Autonomous(name="Blue Left Far", group="chad")
-public class BlueLeftFar extends LinearOpMode {
+public class AutoStuff{
     //
+    private LinearOpMode OpModeReference;
+
+    public AutoStuff(LinearOpMode opMode) {
+        OpModeReference = opMode;
+    }
+
     DcMotor FL;
     DcMotor FR;
     DcMotor BL;
     DcMotor BR;
-    //Servo LHook;
-    //Servo RHook;
+    Servo LHook;
+    Servo RHook;
     //Servo StoneServo;
     //28 * 20 / (2ppi * 4.125)
     Double width = 18.0; //inches
@@ -41,60 +45,13 @@ public class BlueLeftFar extends LinearOpMode {
     Orientation angles;
     Acceleration gravity;
     //
-    public void runOpMode(){
-        //
-        initGyro();
-        //
-        FL = hardwareMap.dcMotor.get("FL");
-        FR = hardwareMap.dcMotor.get("FR");
-        BL = hardwareMap.dcMotor.get("BL");
-        BR = hardwareMap.dcMotor.get("BR");
-        //LHook = hardwareMap.servo.get("LHook");
-        //RHook = hardwareMap.servo.get("RHook");
-        //StoneServo = hardwareMap.servo.get("StoneServo");
 
-        BL.setDirection(DcMotorSimple.Direction.FORWARD);
-        FL.setDirection(DcMotorSimple.Direction.FORWARD);
-        FR.setDirection(DcMotorSimple.Direction.REVERSE);
-        BR.setDirection(DcMotorSimple.Direction.REVERSE);
-        //LHook.setDirection(Servo.Direction.REVERSE);
-        //RHook.setDirection(Servo.Direction.FORWARD);
-
-        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
-        //
-        waitForStart();
-        //LHook.setPosition(1);
-        //RHook.setPosition(1);
-        //
-        moveToPosition(-2, 0.2);
-        //
-        strafeToPosition(13.0, 0.2);
-        //
-        //moveToPosition(-25, 0.5);
-        //moveToPosition(-6, 0.2);
-        //
-        //LHook.setPosition(.91);
-        //RHook.setPosition(.91);
-        //sleep(500);
-        //
-        //moveToPosition(50, 0.5);
-        //
-        //LHook.setPosition(1);
-        //RHook.setPosition(1);
-        //sleep(500);
-        //
-        strafeToPosition(20.0, 0.5);
-        strafeToPosition(-50.0, 0.5);
-        //moveToPosition(-25, 0.2);
-        strafeToPosition(-15.0, 0.5);
-        strafeToPosition(-11.0, 0.2);
-        //
-    }
-    //
     /*
     This function's purpose is simply to drive forward or backward.
     To drive backward, simply make the inches input negative.
      */
+
+
     public void moveToPosition(double inches, double speed){
         //
         int move = (int)(Math.round(inches*conversion));
@@ -138,12 +95,12 @@ public class BlueLeftFar extends LinearOpMode {
         //<editor-fold desc="Initialize">
         angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double yaw = -angles.firstAngle;//make this negative
-        telemetry.addData("Speed Direction", speedDirection);
-        telemetry.addData("Yaw", yaw);
-        telemetry.update();
+        OpModeReference.telemetry.addData("Speed Direction", speedDirection);
+        OpModeReference.telemetry.addData("Yaw", yaw);
+        OpModeReference.telemetry.update();
         //
-        telemetry.addData("stuff", speedDirection);
-        telemetry.update();
+        OpModeReference.telemetry.addData("stuff", speedDirection);
+        OpModeReference.telemetry.update();
         //
         double first;
         double second;
@@ -179,25 +136,25 @@ public class BlueLeftFar extends LinearOpMode {
         turnWithEncoder(speedDirection);
         //
         if (Math.abs(firsta - firstb) < 11) {
-            while (!(firsta < yaw && yaw < firstb) && opModeIsActive()) {//within range?
+            while (!(firsta < yaw && yaw < firstb) && OpModeReference.opModeIsActive()) {//within range?
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-                telemetry.addData("Position", yaw);
-                telemetry.addData("first before", first);
-                telemetry.addData("first after", convertify(first));
-                telemetry.update();
+                OpModeReference.telemetry.addData("Position", yaw);
+                OpModeReference.telemetry.addData("first before", first);
+                OpModeReference.telemetry.addData("first after", convertify(first));
+                OpModeReference.telemetry.update();
             }
         }else{
             //
-            while (!((firsta < yaw && yaw < 180) || (-180 < yaw && yaw < firstb)) && opModeIsActive()) {//within range?
+            while (!((firsta < yaw && yaw < 180) || (-180 < yaw && yaw < firstb)) && OpModeReference.opModeIsActive()) {//within range?
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-                telemetry.addData("Position", yaw);
-                telemetry.addData("first before", first);
-                telemetry.addData("first after", convertify(first));
-                telemetry.update();
+                OpModeReference.telemetry.addData("Position", yaw);
+                OpModeReference.telemetry.addData("first before", first);
+                OpModeReference.telemetry.addData("first after", convertify(first));
+                OpModeReference.telemetry.update();
             }
         }
         //
@@ -207,23 +164,23 @@ public class BlueLeftFar extends LinearOpMode {
         turnWithEncoder(speedDirection / 3);
         //
         if (Math.abs(seconda - secondb) < 11) {
-            while (!(seconda < yaw && yaw < secondb) && opModeIsActive()) {//within range?
+            while (!(seconda < yaw && yaw < secondb) && OpModeReference.opModeIsActive()) {//within range?
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-                telemetry.addData("Position", yaw);
-                telemetry.addData("second before", second);
-                telemetry.addData("second after", convertify(second));
-                telemetry.update();
+                OpModeReference.telemetry.addData("Position", yaw);
+                OpModeReference.telemetry.addData("second before", second);
+                OpModeReference.telemetry.addData("second after", convertify(second));
+                OpModeReference.telemetry.update();
             }
-            while (!((seconda < yaw && yaw < 180) || (-180 < yaw && yaw < secondb)) && opModeIsActive()) {//within range?
+            while (!((seconda < yaw && yaw < 180) || (-180 < yaw && yaw < secondb)) && OpModeReference.opModeIsActive()) {//within range?
                 angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 gravity = imu.getGravity();
                 yaw = -angles.firstAngle;
-                telemetry.addData("Position", yaw);
-                telemetry.addData("second before", second);
-                telemetry.addData("second after", convertify(second));
-                telemetry.update();
+                OpModeReference.telemetry.addData("Position", yaw);
+                OpModeReference.telemetry.addData("second before", second);
+                OpModeReference.telemetry.addData("second after", convertify(second));
+                OpModeReference.telemetry.update();
             }
             FL.setPower(0);
             FR.setPower(0);
@@ -278,7 +235,7 @@ public class BlueLeftFar extends LinearOpMode {
     our way of adding personality to our programs.
      */
     public void waitForStartify(){
-        waitForStart();
+        OpModeReference.waitForStart();
     }
     //
     /*
@@ -315,7 +272,7 @@ public class BlueLeftFar extends LinearOpMode {
         parameters.loggingTag          = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
         //
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        imu = OpModeReference.hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
     }
     //

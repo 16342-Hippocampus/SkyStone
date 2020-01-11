@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -14,24 +13,20 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-//@Disabled
-@Autonomous(name="Blue Left Far", group="chad")
-public class BlueLeftFar extends LinearOpMode {
+@Autonomous(name="AutoTest", group="chad")
+public class AutoTest extends LinearOpMode {
     //
     DcMotor FL;
     DcMotor FR;
     DcMotor BL;
     DcMotor BR;
-    //Servo LHook;
-    //Servo RHook;
-    //Servo StoneServo;
     //28 * 20 / (2ppi * 4.125)
-    Double width = 18.0; //inches
+    Double width = 16.0; //inches
     Integer cpr = 28; //counts per rotation
-    Double gearratio = 19.2;
-    Double diameter = 3.93701;
+    Integer gearratio = 20;
+    Double diameter = 4.0;
     Double cpi = (cpr * gearratio)/(Math.PI * diameter); //counts per inch, 28cpr * gear ratio / (2 * pi * diameter (in inches, in the center))
-    Double bias = 1.01;//default 0.8
+    Double bias = 0.8;//default 0.8
     Double meccyBias = 0.9;//change to adjust only strafing movement
     //
     Double conversion = cpi * bias;
@@ -45,49 +40,49 @@ public class BlueLeftFar extends LinearOpMode {
         //
         initGyro();
         //
-        FL = hardwareMap.dcMotor.get("FL");
-        FR = hardwareMap.dcMotor.get("FR");
+        FL = hardwareMap.dcMotor.get("frontleft");
+        FR = hardwareMap.dcMotor.get("frontright");
         BL = hardwareMap.dcMotor.get("BL");
         BR = hardwareMap.dcMotor.get("BR");
-        //LHook = hardwareMap.servo.get("LHook");
-        //RHook = hardwareMap.servo.get("RHook");
-        //StoneServo = hardwareMap.servo.get("StoneServo");
 
-        BL.setDirection(DcMotorSimple.Direction.FORWARD);
-        FL.setDirection(DcMotorSimple.Direction.FORWARD);
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
-        //LHook.setDirection(Servo.Direction.REVERSE);
-        //RHook.setDirection(Servo.Direction.FORWARD);
-
-        AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
-        waitForStart();
-        //LHook.setPosition(1);
-        //RHook.setPosition(1);
+        waitForStartify();
         //
-        moveToPosition(-2, 0.2);
+        moveToPosition(-25.8, 0.2);
         //
-        strafeToPosition(13.0, 0.2);
+        moveToPosition(25.6, 0.2);
         //
-        //moveToPosition(-25, 0.5);
-        //moveToPosition(-6, 0.2);
+        strafeToPosition(-62.6, 0.2);
         //
-        //LHook.setPosition(.91);
-        //RHook.setPosition(.91);
-        //sleep(500);
+        moveToPosition(-13, 0.2);
         //
-        //moveToPosition(50, 0.5);
+        turnWithGyro(90, 0.2);
         //
-        //LHook.setPosition(1);
-        //RHook.setPosition(1);
-        //sleep(500);
+        turnWithGyro(90, 0.2);
         //
-        strafeToPosition(20.0, 0.5);
-        strafeToPosition(-50.0, 0.5);
-        //moveToPosition(-25, 0.2);
-        strafeToPosition(-15.0, 0.5);
-        strafeToPosition(-11.0, 0.2);
+        moveToPosition(12.6, 0.2);
+        //
+        strafeToPosition(9.4, 0.2);
+        //
+        moveToPosition(-25, 0.2);
+        //
+        strafeToPosition(-46.6, 0.2);
+        //
+        strafeToPosition(41.6, 0.2);
+        //
+        moveToPosition(24.4, 0.2);
+        //
+        strafeToPosition(27.6, 0.2);
+        //
+        strafeToPosition(-27.4, 0.2);
+        //
+        moveToPosition(-24.4, 0.2);
+        //
+        strafeToPosition(-42.0, 0.2);
+        //
+        strafeToPosition(10.8, 0.2);
         //
     }
     //
@@ -336,4 +331,3 @@ public class BlueLeftFar extends LinearOpMode {
     }
     //
 }
-

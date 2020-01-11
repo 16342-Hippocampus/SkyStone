@@ -69,7 +69,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 public class EncoderDriveTest extends LinearOpMode {
 
     /* Declare OpMode members. */
-    GaytorBoi         robot   = new GaytorBoi();   // Use a Pushbot's hardware
+    GaytorBoi         robot   = new GaytorBoi(this);   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
     static final double     TICKS = 537.6 ;

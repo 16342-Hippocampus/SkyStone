@@ -25,7 +25,8 @@
  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+ *//*
+
 
 package org.firstinspires.ftc.teamcode;
 
@@ -40,7 +41,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class EncoderBlueFoundation extends LinearOpMode {
 
-    /* Declare OpMode members. */
+    */
+/* Declare OpMode members. *//*
+
     GaytorBoi         robot   = new GaytorBoi();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -53,10 +56,12 @@ public class EncoderBlueFoundation extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        /*
+        */
+/*
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
-         */
+         *//*
+
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
@@ -92,14 +97,16 @@ public class EncoderBlueFoundation extends LinearOpMode {
         telemetry.update();
     }
 
-    /*
+    */
+/*
      *  Method to perfmorm a relative move, based on encoder counts.
      *  Encoders are not reset as the move is based on the current position.
      *  Move will stop if any of three conditions occur:
      *  1) Move gets to the desired position
      *  2) Move runs out of time
      *  3) Driver stops the opmode running.
-     */
+     *//*
+
     public void encoderDrive(double speed,
                              double frontleftInches, double frontrightInches,
                              double backleftInches, double backrightInches,
@@ -172,3 +179,4 @@ public class EncoderBlueFoundation extends LinearOpMode {
         }
     }
 }
+*/
