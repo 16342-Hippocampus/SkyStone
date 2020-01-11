@@ -13,16 +13,19 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
+import java.io.StringReader;
+
 //@Disabled
-@Autonomous(name="Blue Left Close", group="chad")
-public class BlueLeftClose extends LinearOpMode {
+@Autonomous(name="Servo Test", group="chad")
+public class ServoTest extends LinearOpMode {
     //
     DcMotor FL;
     DcMotor FR;
     DcMotor BL;
     DcMotor BR;
-    //Servo LHook;
-    //Servo RHook;
+    Servo LHook;
+    Servo RHook;
     //Servo StoneServo;
     //28 * 20 / (2ppi * 4.125)
     Double width = 18.0; //inches
@@ -32,6 +35,7 @@ public class BlueLeftClose extends LinearOpMode {
     Double cpi = (cpr * gearratio)/(Math.PI * diameter); //counts per inch, 28cpr * gear ratio / (2 * pi * diameter (in inches, in the center))
     Double bias = 1.01;//default 0.8
     Double meccyBias = 0.9;//change to adjust only strafing movement
+
     //
     Double conversion = cpi * bias;
     Boolean exit = false;
@@ -48,44 +52,30 @@ public class BlueLeftClose extends LinearOpMode {
         FR = hardwareMap.dcMotor.get("FR");
         BL = hardwareMap.dcMotor.get("BL");
         BR = hardwareMap.dcMotor.get("BR");
-        //LHook = hardwareMap.servo.get("LHook");
-        //RHook = hardwareMap.servo.get("RHook");
+        LHook = hardwareMap.servo.get("LHook");
+        RHook = hardwareMap.servo.get("RHook");
         //StoneServo = hardwareMap.servo.get("StoneServo");
 
         BL.setDirection(DcMotorSimple.Direction.FORWARD);
         FL.setDirection(DcMotorSimple.Direction.FORWARD);
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
-        //LHook.setDirection(Servo.Direction.REVERSE);
-        //RHook.setDirection(Servo.Direction.FORWARD);
-
+        LHook.setDirection(Servo.Direction.REVERSE);
+        RHook.setDirection(Servo.Direction.FORWARD);
+        //notifyAll();
         AutoTransitioner.transitionOnStop(this, "Drive Code V1 0 1");
         //
-        waitForStartify();
+        waitForStart();
         //
-        //LHook.setPosition(1);
-        //RHook.setPosition(1);
-        //
-        moveToPosition(-2, 0.2);
-        //
-        strafeToPosition(13.0, 0.2);
-        //
-        //moveToPosition(-25, 0.5);
-        //moveToPosition(-6, 0.2);
-        //
-        //LHook.setPosition(.91);
-        //RHook.setPosition(.91);
-        //sleep(500);
-        //
-        //moveToPosition(50, 0.5);
-        //
-        //LHook.setPosition(1);
-        //RHook.setPosition(1);
-        //sleep(500);
-        //
-        strafeToPosition(20.0, 0.5);
-        strafeToPosition(-65.0, 0.5);
-        strafeToPosition(-11.0, 0.2);
+        LHook.setPosition(1);
+        RHook.setPosition(1);
+
+        sleep(2000);
+
+        LHook.setPosition(0);
+        RHook.setPosition(0);
+        sleep(2000);
+
         //
     }
     //
