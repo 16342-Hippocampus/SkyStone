@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.Servo.Direction;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -87,16 +88,27 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
         LOuttake =hardwareMap.get(CRServo.class, "LOuttake");
         ROuttake =hardwareMap.get(CRServo.class, "ROuttake");
 
+        FL.setDirection(DcMotorSimple.Direction.FORWARD);
+        FR.setDirection(DcMotorSimple.Direction.REVERSE);
+        BL.setDirection(DcMotorSimple.Direction.FORWARD);
+        BR.setDirection(DcMotorSimple.Direction.REVERSE);
+        FRIntake.setDirection(DcMotorSimple.Direction.REVERSE);
+        FLIntake.setDirection(DcMotorSimple.Direction.FORWARD);
+        Roller.setDirection(DcMotorSimple.Direction.FORWARD);
+        LHook.setDirection(Direction.FORWARD);
+        RHook.setDirection(Direction.REVERSE);
+        LOuttake.setDirection(DcMotorSimple.Direction.FORWARD);
+        ROuttake.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
         runtime.reset();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            double lsx = gamepad1.left_stick_x;
-            double r = Math.hypot(-lsx, gamepad1.left_stick_y);
-            double robotAngle = Math.atan2(gamepad1.left_stick_y, -lsx) - Math.PI / 4;
-            double rightX = -gamepad1.right_stick_x;
+            double lsx = -gamepad1.left_stick_x;
+            double r = Math.hypot(-lsx, -gamepad1.left_stick_y);
+            double robotAngle = Math.atan2(-gamepad1.left_stick_y, -lsx) - Math.PI / 4;
+            double rightX = gamepad1.right_stick_x;
             final double v1 = r * Math.cos(robotAngle) + rightX;
             final double v2 = r * Math.sin(robotAngle) - rightX;
             final double v3 = r * Math.sin(robotAngle) + rightX;
@@ -125,14 +137,14 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
                 FRIntake.setPower(0.5);
                 FLIntake.setPower(0.5);
                 Roller.setPower(-0.75);
-                LOuttake.setPower(0.75);
-                ROuttake.setPower(0.75);
+                LOuttake.setPower(-0.75);
+                ROuttake.setPower(-0.75);
             } else if (gamepad1.left_trigger > 0.25 /*&& !IntakeLimit.isPressed()*/){
                 FRIntake.setPower(-.5);
                 FLIntake.setPower(-.5 );
                 Roller.setPower(-0.75);
-                LOuttake.setPower(-0.75);
-                ROuttake.setPower(-0.75);
+                LOuttake.setPower(0.75);
+                ROuttake.setPower(0.75);
             } else {
                 FRIntake.setPower(0);
                 FLIntake.setPower(0);
@@ -155,15 +167,15 @@ public class Drive_Code_V1_0_1 extends LinearOpMode {
 
             }*/
 
-/*            if (gamepad1.dpad_up){
+            if (gamepad1.dpad_up){
                 RHook.setPosition(1);
                 LHook.setPosition(1);
             }else if (gamepad1.dpad_down){
-                RHook.setPosition(.91);
-                LHook.setPosition(.91);
+                RHook.setPosition(0);
+                LHook.setPosition(0);
             }
 
-            if (gamepad1.dpad_left){
+            /*if (gamepad1.dpad_left){
                 StoneServo.setPosition(0.28);
             }else if(gamepad1.dpad_right){
                 StoneServo.setPosition(0.9);
